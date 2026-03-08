@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <meta name="theme-color" content="#3A1A06">
-<title>কাচ্চি ডাইন - ভৈরব</title>
+<title>কাচ্চি ডাইন - ভৈরব শাখা</title>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Noto+Serif+Bengali:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -28,7 +28,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const DB   = firebase.database();
 const AUTH = firebase.auth();
-const DB_PREFIX = ''; // মানিকগঞ্জ = root
+const DB_PREFIX = 'branches/bhoirob/'; // ভৈরব শাখা
 function dbRef(path){ return DB.ref(DB_PREFIX + path); }
 </script>
 
@@ -474,22 +474,19 @@ footer small{font-size:.72rem;opacity:.45;}
    DEFAULT DATA
 ============================================================ */
 const DEF_SETTINGS = {
-  name:'কাচ্চি ডাইন', branch:'মানিকগঞ্জ শাখা',
-  hotline:'01700-000000', address:'মানিকগঞ্জ, ঢাকা',
+  name:'কাচ্চি ডাইন', branch:'ভৈরব শাখা',
+  hotline:'', address:'ভৈরব, কিশোরগঞ্জ',
   facebook:'https://facebook.com', whatsapp:'https://wa.me/8801700000000',
   logo:'', cover:''
 };
 
 // Default delivery zones — Admin can override via DB
 const DEF_ZONES = [
-  { id:'z1', name:'মানিকগঞ্জ সদর',    charge:0,   note:'বিনামূল্যে ডেলিভারি' },
-  { id:'z2', name:'ঘিওর',              charge:40,  note:'৪০ টাকা ডেলিভারি চার্জ' },
-  { id:'z3', name:'সিংগাইর',           charge:50,  note:'৫০ টাকা ডেলিভারি চার্জ' },
-  { id:'z4', name:'হরিরামপুর',         charge:60,  note:'৬০ টাকা ডেলিভারি চার্জ' },
-  { id:'z5', name:'শিবালয়',            charge:70,  note:'৭০ টাকা ডেলিভারি চার্জ' },
-  { id:'z6', name:'দৌলতপুর',           charge:80,  note:'৮০ টাকা ডেলিভারি চার্জ' },
-  { id:'z7', name:'সাটুরিয়া',          charge:60,  note:'৬০ টাকা ডেলিভারি চার্জ' },
-  { id:'z8', name:'অন্যান্য এলাকা',    charge:100, note:'১০০ টাকা ডেলিভারি চার্জ' },
+  { id:'z1', name:'ভৈরব সদর',          charge:0,   note:'বিনামূল্যে ডেলিভারি' },
+  { id:'z2', name:'আশুগঞ্জ',            charge:40,  note:'৪০ টাকা ডেলিভারি চার্জ' },
+  { id:'z3', name:'বাজিতপুর',           charge:50,  note:'৫০ টাকা ডেলিভারি চার্জ' },
+  { id:'z4', name:'কুলিয়ারচর',          charge:60,  note:'৬০ টাকা ডেলিভারি চার্জ' },
+  { id:'z5', name:'অন্যান্য এলাকা',    charge:100, note:'১০০ টাকা ডেলিভারি চার্জ' },
 ];
 
 const DEF_MENU = [
