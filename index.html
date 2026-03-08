@@ -45,6 +45,10 @@ function dbRef(path){ return DB.ref(DB_PREFIX + path); }
 html{scroll-behavior:smooth;}
 body{font-family:'Hind Siliguri',sans-serif;background:var(--cream);color:var(--txt);min-height:100vh;overflow-x:hidden;}
 
+/* CLOSED SCREEN */
+#closedScreen { display: none; }
+#closedScreen.show { display: block !important; }
+
 /* LOADER */
 #loader{position:fixed;inset:0;background:linear-gradient(135deg,var(--brown-d) 0%,#1a0800 100%);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:18px;z-index:9999;transition:opacity .5s;}
 .ld-logo{font-family:'Noto Serif Bengali',serif;font-size:2.8rem;font-weight:800;color:var(--gold);text-shadow:0 0 30px rgba(201,162,39,.5);animation:glow 2s ease-in-out infinite;}
@@ -287,6 +291,46 @@ footer small{font-size:.72rem;opacity:.45;}
 </head>
 <body>
 
+
+<!-- BRANCH CLOSED SCREEN -->
+<div id="closedScreen" style="position:fixed;inset:0;z-index:99999;overflow-y:auto;">
+  <div style="min-height:100vh;background:linear-gradient(160deg,#1a0800 0%,#3A1A06 50%,#1a0800 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px 20px;text-align:center;">
+    
+    <!-- Logo area -->
+    <div style="width:90px;height:90px;border-radius:50%;border:3px solid #C9A227;background:linear-gradient(135deg,#8B6914,#C9A227);display:flex;align-items:center;justify-content:center;font-size:2.5rem;margin-bottom:18px;box-shadow:0 0 30px rgba(201,162,39,.4);">
+      🍛
+    </div>
+
+    <div style="font-family:'Noto Serif Bengali',serif;font-size:2rem;font-weight:800;color:#C9A227;margin-bottom:4px;" id="closedName">কাচ্চি ডাইন</div>
+    <div style="font-size:.9rem;color:rgba(255,255,255,.55);margin-bottom:28px;letter-spacing:1px;" id="closedBranch">শাখা</div>
+
+    <!-- Closed box -->
+    <div style="background:rgba(239,68,68,.1);border:2px solid rgba(239,68,68,.35);border-radius:20px;padding:24px 28px;margin-bottom:28px;max-width:340px;width:100%;">
+      <div style="font-size:2.5rem;margin-bottom:10px;">⛔</div>
+      <div style="font-family:'Noto Serif Bengali',serif;font-size:1.3rem;font-weight:800;color:#fca5a5;margin-bottom:8px;">এই শাখা এখন বন্ধ আছে</div>
+      <div style="font-size:.85rem;color:rgba(255,255,255,.55);line-height:1.6;">আমরা এখন অর্ডার নিচ্ছি না।<br>পরে আবার চেষ্টা করুন।</div>
+    </div>
+
+    <!-- Contact buttons -->
+    <div style="width:100%;max-width:320px;display:flex;flex-direction:column;gap:12px;">
+      
+      <!-- Call button -->
+      <a id="closedCall" href="#" style="display:flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,#C9A227,#F0C040);color:#3A1A06;border-radius:14px;padding:15px;text-decoration:none;font-family:'Hind Siliguri',sans-serif;font-size:1rem;font-weight:800;box-shadow:0 4px 15px rgba(201,162,39,.35);">
+        <i class="fas fa-phone" style="font-size:1.1rem"></i>
+        <span>কল করুন — <span id="closedHotline">01700-000000</span></span>
+      </a>
+
+      <!-- WhatsApp button -->
+      <a id="closedWa" href="#" style="display:flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,#16a34a,#25d366);color:#fff;border-radius:14px;padding:15px;text-decoration:none;font-family:'Hind Siliguri',sans-serif;font-size:1rem;font-weight:800;box-shadow:0 4px 15px rgba(37,211,102,.3);">
+        <i class="fab fa-whatsapp" style="font-size:1.2rem"></i>
+        WhatsApp-এ মেসেজ করুন
+      </a>
+
+    </div>
+
+    <div style="margin-top:24px;font-size:.75rem;color:rgba(255,255,255,.3);">© কাচ্চি ডাইন</div>
+  </div>
+</div>
 <div id="offBar">📵 অফলাইন — ক্যাশড ডেটা দেখানো হচ্ছে</div>
 
 <!-- LOADER -->
@@ -482,11 +526,11 @@ const DEF_SETTINGS = {
 
 // Default delivery zones — Admin can override via DB
 const DEF_ZONES = [
-  { id:'z1', name:'ভৈরব সদর',          charge:0,   note:'বিনামূল্যে ডেলিভারি' },
-  { id:'z2', name:'আশুগঞ্জ',            charge:40,  note:'৪০ টাকা ডেলিভারি চার্জ' },
-  { id:'z3', name:'বাজিতপুর',           charge:50,  note:'৫০ টাকা ডেলিভারি চার্জ' },
-  { id:'z4', name:'কুলিয়ারচর',          charge:60,  note:'৬০ টাকা ডেলিভারি চার্জ' },
-  { id:'z5', name:'অন্যান্য এলাকা',    charge:100, note:'১০০ টাকা ডেলিভারি চার্জ' },
+  { id:'z1', name:'ভৈরব সদর',       charge:0 },
+  { id:'z2', name:'আশুগঞ্জ',         charge:40 },
+  { id:'z3', name:'বাজিতপুর',        charge:50 },
+  { id:'z4', name:'কুলিয়ারচর',       charge:60 },
+  { id:'z5', name:'অন্যান্য এলাকা', charge:100 },
 ];
 
 const DEF_MENU = [
@@ -1024,6 +1068,40 @@ function buildWhatsAppMsg(order){
 
   return msg;
 }
+
+/* ============================================================
+   BRANCH STATUS CHECK
+============================================================ */
+function checkBranchStatus(){
+  DB.ref(DB_PREFIX + 'status').on('value', snap=>{
+    const v = snap.val();
+    const screen = document.getElementById('closedScreen');
+    if(v && v.closed === true){
+      // সব কাজ বন্ধ করো
+      screen.classList.add('show');
+      document.body.style.overflow = 'hidden';
+      document.body.style.pointerEvents = 'none';
+      screen.style.pointerEvents = 'all';
+      // loader সরাও
+      const l = document.getElementById('loader');
+      if(l){ l.style.display='none'; }
+      // তথ্য সেট করো
+      const name    = sett.name    || 'কাচ্চি ডাইন';
+      const branch  = sett.branch  || 'শাখা';
+      const hotline = sett.hotline || '';
+      const wa      = sett.whatsapp|| '#';
+      document.getElementById('closedName').textContent    = name;
+      document.getElementById('closedBranch').textContent  = branch;
+      document.getElementById('closedHotline').textContent = hotline || 'যোগাযোগ করুন';
+      document.getElementById('closedCall').href = hotline ? 'tel:'+hotline : '#';
+      document.getElementById('closedWa').href   = wa;
+    } else {
+      screen.classList.remove('show');
+      document.body.style.overflow = '';
+      document.body.style.pointerEvents = '';
+    }
+  });
+}
 async function syncQueue(){
   const q=JSON.parse(localStorage.getItem('kd_q')||'[]');
   for(const o of q){
@@ -1070,6 +1148,8 @@ window.addEventListener('DOMContentLoaded', function(){
   startListeners();
   // Sync queued offline orders
   if(navigator.onLine) syncQueue();
+  // শাখা বন্ধ কিনা চেক করো
+  checkBranchStatus();
 });
 </script>
 </body>
